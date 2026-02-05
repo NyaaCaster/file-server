@@ -33,7 +33,7 @@ docker-compose up -d --build
 打开浏览器访问：
 
 - **本地访问**: `https://localhost:5100/files/`
-- **域名访问**: `https://h.hony-wen.com:5100/files/`
+- **域名访问**: `https://your-domain.com:5100/files/`
 
 ### 3. 添加和管理文件
 
@@ -58,8 +58,8 @@ file-server/
 ├── nginx.conf              # Nginx 服务器配置
 ├── .dockerignore           # Docker 构建忽略文件
 ├── SSL/                    # SSL 证书目录
-│   ├── h.hony-wen.com.key
-│   ├── h.hony-wen.com_bundle.crt
+│   ├── 证书.key
+│   ├── 证书_bundle.crt
 │   └── ...
 ├── Files/                  # 文件存储目录（映射到容器）
 │   └── README.txt          # 示例文件
@@ -222,8 +222,7 @@ MIT License
 
 如有问题或建议，请通过以下方式联系：
 
-- 域名：h.hony-wen.com
-- 项目地址：[GitHub](https://github.com/your-repo)
+- 项目地址：[GitHub](https://github.com/NyaaCaster/)
 
 ---
 

@@ -1,0 +1,19 @@
+services:
+  file-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: file-server
+    ports:
+      - "5100:5100"
+    volumes:
+      - ./Files:/usr/share/nginx/html/files
+    environment:
+      - TZ=Asia/Shanghai
+    restart: unless-stopped
+    networks:
+      - file-server-network
+
+networks:
+  file-server-network:
+    driver: bridge

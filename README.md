@@ -222,7 +222,7 @@ MIT License
 
 如有问题或建议，请通过以下方式联系：
 
-- 项目地址：[GitHub](https://github.com/NyaaCaster/)
+- 项目地址：[GitHub](https://github.com/NyaaCaster/file-server/)
 
 ---
 

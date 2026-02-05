@@ -58,8 +58,8 @@ file-server/
 ├── nginx.conf              # Nginx 服务器配置
 ├── .dockerignore           # Docker 构建忽略文件
 ├── SSL/                    # SSL 证书目录
-│   ├── 证书.key
-│   ├── 证书_bundle.crt
+│   ├── your-domain.com.key
+│   ├── your-domain.com_bundle.crt
 │   └── ...
 ├── Files/                  # 文件存储目录（映射到容器）
 │   └── README.txt          # 示例文件

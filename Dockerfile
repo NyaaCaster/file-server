@@ -4,9 +4,6 @@ FROM nginx:alpine
 RUN mkdir -p /usr/share/nginx/html/files
 RUN mkdir -p /etc/nginx/ssl
 
-# 复制 SSL 证书
-COPY SSL/ /etc/nginx/ssl/
-
 # 复制 nginx 配置
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 

@@ -8,6 +8,7 @@ services:
       - "5100:5100"
     volumes:
       - ./Files:/usr/share/nginx/html/files
+      - ./SSL:/etc/nginx/ssl
     environment:
       - TZ=Asia/Shanghai
     restart: unless-stopped

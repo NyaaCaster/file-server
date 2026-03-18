@@ -5,17 +5,23 @@ services:
       dockerfile: Dockerfile
     container_name: file-server
     ports:
-      - "5100:5100"
+      - "5101:80"
+      - "5102:443"
+      - "5103:8080"
     volumes:
       - ./Files:/usr/share/nginx/html/files
-      - ./SSL:/etc/nginx/ssl
+      - ./SSL:/etc/nginx/ssl:ro
+      - ./upload-server/api-keys.env:/app/config/api-keys.env:ro
     environment:
       - TZ=Asia/Shanghai
+      - PORT=8080
+      - UPLOAD_DIR=/usr/share/nginx/html/files
+      - API_KEYS_FILE=/app/config/api-keys.env
+      - FILE_SERVER_BASE_URL=/files
     restart: unless-stopped
     networks:
-      - app-network
+      - file-server-network
 
 networks:
-  app-network:
-    external: true
-    name: avg-adventurertavern_app-network
+  file-server-network:
+    driver: bridge

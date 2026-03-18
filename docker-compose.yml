@@ -13,8 +13,9 @@ services:
       - TZ=Asia/Shanghai
     restart: unless-stopped
     networks:
-      - file-server-network
+      - app-network
 
 networks:
-  file-server-network:
-    driver: bridge
+  app-network:
+    external: true
+    name: avg-adventurertavern_app-network

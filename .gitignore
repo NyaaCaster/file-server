@@ -6,8 +6,12 @@ Files/*
 SSL/*
 !SSL/.gitkeep
 
-# API Keys 配置文件（包含敏感信息，不提交）
-upload-server/api-keys.env
+# 环境变量配置（包含敏感信息，不提交）
+.env
+
+# 实际使用的 docker-compose 配置（端口可能因部署环境不同而调整）
+# 以 docker-compose.example.yml 作为模板
+docker-compose.yml
 
 # Node.js 依赖
 node_modules/

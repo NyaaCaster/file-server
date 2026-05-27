@@ -3,7 +3,7 @@ const multer = require('multer');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
-require('dotenv').config({ path: process.env.API_KEYS_FILE || '/app/config/api-keys.env' });
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -12,7 +12,7 @@ const FILE_SERVER_BASE_URL = process.env.FILE_SERVER_BASE_URL || '/files';
 const API_KEY = process.env.API_KEY || 'test-api-key-for-testing';
 
 if (process.env.NODE_ENV !== 'test' && !process.env.API_KEY) {
-    console.error('[Error] API_KEY not set. Please configure api-keys.env');
+    console.error('[Error] API_KEY not set. Please configure file-server/.env');
     process.exit(1);
 }
 

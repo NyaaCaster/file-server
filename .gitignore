@@ -1,6 +1,9 @@
+# Claude Code 本地配置
+.claude/
+
 # Files 目录下的用户上传文件
 Files/*
-!Files/README.txt
+!Files/.gitkeep
 
 # SSL 证书
 SSL/*

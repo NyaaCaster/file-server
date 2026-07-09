@@ -1,0 +1,37 @@
+# AVG file-server publish compose — macmini deployment.
+#
+# Differs from the dev compose (docker-compose.yml) only in:
+#   - No `build:` section — image is pulled from NyaaDockerHUB private registry.
+#   - `pull_policy: always` ensures :latest is always refreshed.
+#   - Volume paths use env vars (${AVG_FILES_DIR:?err}, ${AVG_SSL_DIR:?err})
+#     so user files and SSL live on the DockerRes HDD.
+#   - Image ref uses ${PRIVATE_DOCKER_REGISTRY_HOST:?err} so compose fails fast
+#     if the variable is not set in .env.
+
+name: adv-file-server
+
+services:
+  file-server:
+    image: ${PRIVATE_DOCKER_REGISTRY_HOST:?err}/adv-file-server:latest
+    container_name: adv-file-server
+    pull_policy: always
+    env_file:
+      - .env
+    ports:
+      - "5101:80"
+      - "5102:443"
+      - "5103:8080"
+    volumes:
+      - ${AVG_FILES_DIR:?err}:/usr/share/nginx/html/files
+      - ${AVG_SSL_DIR:?err}:/etc/nginx/ssl:ro
+    environment:
+      - PORT=8080
+      - UPLOAD_DIR=/usr/share/nginx/html/files
+      - FILE_SERVER_BASE_URL=/files
+    restart: unless-stopped
+    networks:
+      - file-server-network
+
+networks:
+  file-server-network:
+    driver: bridge

@@ -12,7 +12,8 @@ services:
       - "8080:8080"   # 上传 API 端口
     volumes:
       - ./Files:/usr/share/nginx/html/files
-      - ./SSL:/etc/nginx/ssl:ro
+      # 证书目录需含 fullchain.pem + privkey.pem（LE SAN 证书，与酒馆共用）
+      - ${AVG_CERT_DIR:-./SSL}:/etc/nginx/ssl:ro
     environment:
       - PORT=8080
       - UPLOAD_DIR=/usr/share/nginx/html/files

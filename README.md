@@ -50,9 +50,12 @@ cp docker-compose.example.yml docker-compose.yml
 
 ### 3. 配置 SSL 证书
 
-将 SSL 证书放入 `./SSL` 目录：
-- `your-domain.com.key` - 私钥文件
-- `your-domain.com_bundle.crt` - 证书文件
+证书目录（默认 `./SSL`，可用环境变量 `AVG_CERT_DIR` 覆盖）需含 **Let's Encrypt SAN 证书**（覆盖 `h.hony-wen.com` + `h.nyaa.host`，与酒馆共用同一张）：
+
+- `fullchain.pem` - 证书链
+- `privkey.pem` - 私钥文件
+
+macmini 生产环境的证书目录是 `/root/DockerContainer/AVG-AdventurerTavern/certs`，由宿主 acme.sh 每日自动续期 → `acme/reload_certs.py` 同步并 reload 本容器（无需手动更换）。
 
 ### 4. 构建并启动容器
 
@@ -85,7 +88,7 @@ file-server/
 ├── .env.example                # 配置示例（提交）
 ├── .env                        # 实际配置（不提交）
 ├── Files/                      # 文件存储目录
-├── SSL/                        # SSL 证书目录
+├── SSL/                        # 本地开发用证书目录（需含 fullchain.pem + privkey.pem）
 ├── upload-server/              # 上传服务
 │   ├── index.js
 │   └── package.json

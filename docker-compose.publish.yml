@@ -3,8 +3,10 @@
 # Differs from the dev compose (docker-compose.yml) only in:
 #   - No `build:` section — image is pulled from NyaaDockerHUB private registry.
 #   - `pull_policy: always` ensures :latest is always refreshed.
-#   - Volume paths use env vars (${AVG_FILES_DIR:?err}, ${AVG_SSL_DIR:?err})
+#   - Volume paths use env vars (${AVG_FILES_DIR:?err}, ${AVG_CERT_DIR:?err})
 #     so user files and SSL live on the DockerRes HDD.
+#     ${AVG_CERT_DIR} must contain the LE SAN cert pair (fullchain.pem + privkey.pem)
+#     as refreshed by the acme.sh hook (macmini: /root/DockerContainer/AVG-AdventurerTavern/certs).
 #   - Image ref uses ${PRIVATE_DOCKER_REGISTRY_HOST:?err} so compose fails fast
 #     if the variable is not set in .env.
 
@@ -23,7 +25,7 @@ services:
       - "5103:8080"
     volumes:
       - ${AVG_FILES_DIR:?err}:/usr/share/nginx/html/files
-      - ${AVG_SSL_DIR:?err}:/etc/nginx/ssl:ro
+      - ${AVG_CERT_DIR:?err}:/etc/nginx/ssl:ro
     environment:
       - PORT=8080
       - UPLOAD_DIR=/usr/share/nginx/html/files
